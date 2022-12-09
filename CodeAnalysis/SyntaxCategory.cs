@@ -1,8 +1,8 @@
 namespace Kinda.CodeAnalysis
 {
-    enum SyntaxCategory 
+    public enum SyntaxCategory 
     {
-        BinaryExpression,
+        // Tokens
         EndOfFileToken,
         NumberToken,
         WhiteSpaceToken,
@@ -10,9 +10,13 @@ namespace Kinda.CodeAnalysis
         MinusToken,
         TimesToken,
         DivideToken,
+        UnknownToken,
         OpenParenthesisToken,
         CloseParenthesisToken,
-        UnknownToken,
+
+        // Expressions
+        NmuberExpression,
+        BinaryExpression,
         ParenthesizedExpression,
     }
 }

@@ -4,7 +4,7 @@ namespace Kinda.CodeAnalysis
     The component for structuring token from a given text
     into a tree-structure as a intermedium representation
     */
-    class Parser
+    internal sealed class Parser
     {
         private readonly SyntaxToken[] _tokens;
         private int _position_index;
@@ -52,18 +52,17 @@ namespace Kinda.CodeAnalysis
         // Use => for lambda expression
         public SyntaxToken get_current_token => Peek(0);
 
-        //
-        private ExpressionSyntax ParseExpression()
-        {
-            return ParseTerm();
-        }
-
         // Build the syntax tree with expression and the EOF token
         public SyntaxTree Parse() 
         {
-            var expression = ParseTerm();
-            var eofToken = Match(SyntaxCategory.EndOfFileToken);
+            var expression = ParseExpression();
+            var eofToken = MatchToken(SyntaxCategory.EndOfFileToken);
             return new SyntaxTree(_diagnostics, expression, eofToken);
+        }
+
+        private ExpressionSyntax ParseExpression()
+        {
+            return ParseTerm();
         }
 
         // The implementation of Recursive descent parser
@@ -116,17 +115,17 @@ namespace Kinda.CodeAnalysis
                 var left = get_current_token;
                 _position_index++;
                 var expression = ParseExpression();
-                var right = Match(SyntaxCategory.CloseParenthesisToken);
+                var right = MatchToken(SyntaxCategory.CloseParenthesisToken);
                 return new ParenthesizedExpressionSyntax(left, expression, right);
             }
 
             // Match the token with the NumberToken category
-            var numberToken = Match(SyntaxCategory.NumberToken);
+            var numberToken = MatchToken(SyntaxCategory.NumberToken);
             return new NmuberExpressionSyntax(numberToken);
         }
 
         // Use for matching a specific token category
-        private SyntaxToken Match(SyntaxCategory category) 
+        private SyntaxToken MatchToken(SyntaxCategory category) 
         {
             var token = get_current_token;
             // If match a category, then return the token

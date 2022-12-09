@@ -3,7 +3,7 @@ namespace Kinda.CodeAnalysis
     /*
     The token read from the given text
     */
-    class SyntaxToken : SyntaxNode
+    public sealed class SyntaxToken : SyntaxNode
     {
         public SyntaxToken(SyntaxCategory category, int position, string text, object value) {
             Category = category;

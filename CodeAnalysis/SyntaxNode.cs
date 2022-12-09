@@ -3,7 +3,7 @@ namespace Kinda.CodeAnalysis
     /*
     Node for syntax tree construction
     */
-    abstract class SyntaxNode 
+    public abstract class SyntaxNode 
     {
         public abstract SyntaxCategory Category { get; }
 

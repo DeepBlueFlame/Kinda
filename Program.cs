@@ -3,11 +3,13 @@ using Kinda.CodeAnalysis;
 
 namespace Kinda
 {
-    class Program
+    
+    internal static class Program
     {
-        static void Main(string[] args)
+        private static void Main()
         {
             bool showTree = false;
+
             while (true)
             {
                 // Write something to the console
@@ -33,12 +35,11 @@ namespace Kinda
                 // Get the syntax tree
                 var syntaxTree = SyntaxTree.Parse(line);
 
-                var color = Console.ForegroundColor;
                 // Show the tree in a dark gray color if show tree
                 if (showTree) {
                     Console.ForegroundColor = ConsoleColor.DarkGray;
                     show_parse_tree(syntaxTree.Root);
-                    Console.ForegroundColor = color;
+                    Console.ResetColor();
                 }
 
                 // Show the error in a dark red color if has
@@ -57,7 +58,7 @@ namespace Kinda
                     foreach (var diagnostics in syntaxTree.Diagnostics)
                         Console.WriteLine(diagnostics);
                     
-                    Console.ForegroundColor = color;
+                    Console.ResetColor();
                 }
             }
         }

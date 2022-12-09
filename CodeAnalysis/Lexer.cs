@@ -4,7 +4,7 @@ namespace Kinda.CodeAnalysis
     The component for reading 'words' from a given text
     accroding to the defined syntax
     */
-    class Lexer
+    internal sealed class Lexer
     {
         private readonly string _text; // The text
         private int _position_index;   // The position index of the current token
