@@ -121,7 +121,7 @@ namespace Kinda.CodeAnalysis
 
             // Match the token with the NumberToken category
             var numberToken = MatchToken(SyntaxCategory.NumberToken);
-            return new NmuberExpressionSyntax(numberToken);
+            return new LiteralExpressionSyntax(numberToken);
         }
 
         // Use for matching a specific token category
