@@ -1,0 +1,15 @@
+E:\C#\Compiler\Kinda\bin\Debug\net6.0\Kinda.exe
+E:\C#\Compiler\Kinda\bin\Debug\net6.0\Kinda.deps.json
+E:\C#\Compiler\Kinda\bin\Debug\net6.0\Kinda.runtimeconfig.json
+E:\C#\Compiler\Kinda\bin\Debug\net6.0\Kinda.dll
+E:\C#\Compiler\Kinda\bin\Debug\net6.0\ref\Kinda.dll
+E:\C#\Compiler\Kinda\bin\Debug\net6.0\Kinda.pdb
+E:\C#\Compiler\Kinda\obj\Debug\net6.0\Kinda.csproj.AssemblyReference.cache
+E:\C#\Compiler\Kinda\obj\Debug\net6.0\Kinda.GeneratedMSBuildEditorConfig.editorconfig
+E:\C#\Compiler\Kinda\obj\Debug\net6.0\Kinda.AssemblyInfoInputs.cache
+E:\C#\Compiler\Kinda\obj\Debug\net6.0\Kinda.AssemblyInfo.cs
+E:\C#\Compiler\Kinda\obj\Debug\net6.0\Kinda.csproj.CoreCompileInputs.cache
+E:\C#\Compiler\Kinda\obj\Debug\net6.0\Kinda.dll
+E:\C#\Compiler\Kinda\obj\Debug\net6.0\ref\Kinda.dll
+E:\C#\Compiler\Kinda\obj\Debug\net6.0\Kinda.pdb
+E:\C#\Compiler\Kinda\obj\Debug\net6.0\Kinda.genruntimeconfig.cache
