@@ -7,7 +7,7 @@ namespace Kinda.CodeAnalysis
             LiteralToken = literalToken;
         }
 
-        public override SyntaxCategory Category => SyntaxCategory.NumberToken;
+        public override SyntaxCategory Category => SyntaxCategory.LiteralExpression;
         public SyntaxToken LiteralToken { get; }
 
         public override IEnumerable<SyntaxNode> get_children()

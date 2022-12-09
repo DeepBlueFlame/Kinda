@@ -17,7 +17,7 @@ namespace Kinda.CodeAnalysis
 
             do 
             {
-                token = lexer.get_next_token();   // Get the next token 
+                token = lexer.Lex();   // Get the next token 
 
                 // Ignore the whitespace and the unknown tokens
                 // Add the token to the token list
@@ -50,7 +50,7 @@ namespace Kinda.CodeAnalysis
 
         // Return the  token in the token list
         // Use => for lambda expression
-        public SyntaxToken get_current_token => Peek(0);
+        public SyntaxToken GetCurrentToken => Peek(0);
 
         // Build the syntax tree with expression and the EOF token
         public SyntaxTree Parse() 
@@ -72,10 +72,10 @@ namespace Kinda.CodeAnalysis
 
             // If the token is operator, then return the BinaryExpressionSyntax
             // Use while for deduplicating 
-            while (get_current_token.Category == SyntaxCategory.PlusToken ||
-                   get_current_token.Category == SyntaxCategory.MinusToken) 
+            while (GetCurrentToken.Category == SyntaxCategory.PlusToken ||
+                   GetCurrentToken.Category == SyntaxCategory.MinusToken) 
                 {
-                    var operatorToken = get_current_token; // Get the operator
+                    var operatorToken = GetCurrentToken; // Get the operator
                     _position_index++; // Move to the next position index
 
                     var right = ParseFactor();
@@ -93,10 +93,10 @@ namespace Kinda.CodeAnalysis
 
             // If the token is operator, then return the BinaryExpressionSyntax
             // Use while for deduplicating 
-            while (get_current_token.Category == SyntaxCategory.TimesToken ||
-                   get_current_token.Category == SyntaxCategory.DivideToken) 
+            while (GetCurrentToken.Category == SyntaxCategory.TimesToken ||
+                   GetCurrentToken.Category == SyntaxCategory.DivideToken) 
                 {
-                    var operatorToken = get_current_token; // Get the operator
+                    var operatorToken = GetCurrentToken; // Get the operator
                     _position_index++; // Move to the next position index
 
                     var right = ParsePrimaryExpression();
@@ -110,9 +110,9 @@ namespace Kinda.CodeAnalysis
         // The implementation of the ParsePrimaryExpression()
         private ExpressionSyntax ParsePrimaryExpression() 
         {
-            if (get_current_token.Category == SyntaxCategory.OpenParenthesisToken)
+            if (GetCurrentToken.Category == SyntaxCategory.OpenParenthesisToken)
             {
-                var left = get_current_token;
+                var left = GetCurrentToken;
                 _position_index++;
                 var expression = ParseExpression();
                 var right = MatchToken(SyntaxCategory.CloseParenthesisToken);
@@ -127,7 +127,7 @@ namespace Kinda.CodeAnalysis
         // Use for matching a specific token category
         private SyntaxToken MatchToken(SyntaxCategory category) 
         {
-            var token = get_current_token;
+            var token = GetCurrentToken;
             // If match a category, then return the token
             if (token.Category == category) {
                 _position_index++;
@@ -135,7 +135,7 @@ namespace Kinda.CodeAnalysis
             }
 
             // Give error for unknown tokens category
-            _diagnostics.Add($"ERROR: unknown tokens category: <{get_current_token.Category}>, Expected <{category}>");
+            _diagnostics.Add($"ERROR: unknown tokens category: <{GetCurrentToken.Category}>, Expected <{category}>");
 
             // If not match, then return a manufactured SyntanToken
             return new SyntaxToken(category, token.Position, null, null);

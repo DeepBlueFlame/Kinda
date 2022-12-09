@@ -15,7 +15,7 @@ namespace Kinda.CodeAnalysis
         CloseParenthesisToken,
 
         // Expressions
-        NmuberExpression,
+        LiteralExpression,
         BinaryExpression,
         ParenthesizedExpression,
     }

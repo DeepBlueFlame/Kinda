@@ -17,8 +17,8 @@ namespace Kinda.CodeAnalysis
         public int EvaluateExpression(ExpressionSyntax node)
         {
             // For numberexpression, return the value
-            if (node is NmuberExpressionSyntax n) 
-                return (int) n.NumberToken.Value;
+            if (node is LiteralExpressionSyntax n) 
+                return (int) n.LiteralToken.Value;
 
             // For binaryexpression
             if (node is BinaryExpressionSyntax b)

@@ -18,7 +18,7 @@ namespace Kinda.CodeAnalysis
         public IEnumerable<string> Diagnostics => _diagnostics;
 
         // The method for getting the current token from the string
-        private char get_current_token{
+        private char GetCurrentToken{
             get {
                 // If the index is greater than the given string length
                 // then return '\0'
@@ -35,7 +35,7 @@ namespace Kinda.CodeAnalysis
         //     _position_index++;
         // }
 
-        public SyntaxToken get_next_token() {
+        public SyntaxToken Lex() {
             // <number>: 1, 2, 3, ...
             // <operator>: +, -, * , /
             // <whitespace>: ' '
@@ -46,11 +46,11 @@ namespace Kinda.CodeAnalysis
             }
 
             // For digits in the text
-            if (char.IsDigit(get_current_token)) {
+            if (char.IsDigit(GetCurrentToken)) {
                 var start_index = _position_index;
 
                 // Keep scanning until the char is not a digit
-                while (char.IsDigit(get_current_token))
+                while (char.IsDigit(GetCurrentToken))
                     _position_index++;
                     // move_to_next_token();
 
@@ -69,11 +69,11 @@ namespace Kinda.CodeAnalysis
             }
 
             // For white space in the text
-            if (char.IsWhiteSpace(get_current_token)) {
+            if (char.IsWhiteSpace(GetCurrentToken)) {
                  var start_index = _position_index;
 
                 // Keep scanning until the char is not a whitespace
-                while (char.IsWhiteSpace(get_current_token))
+                while (char.IsWhiteSpace(GetCurrentToken))
                     _position_index++;
                     // move_to_next_token();
 
@@ -86,26 +86,41 @@ namespace Kinda.CodeAnalysis
             }
 
             // For operators
-            if (get_current_token == '+') {
-                return new SyntaxToken(SyntaxCategory.PlusToken, _position_index++, "+", null);
-            } else if (get_current_token == '-') {
-                return new SyntaxToken(SyntaxCategory.MinusToken, _position_index++, "-", null);
-            } else if (get_current_token == '*') {
-                return new SyntaxToken(SyntaxCategory.TimesToken, _position_index++, "*", null);
-            } else if (get_current_token == '/') {
-                return new SyntaxToken(SyntaxCategory.DivideToken, _position_index++, "/", null);
-            } else if (get_current_token == '(') {
-                return new SyntaxToken(SyntaxCategory.OpenParenthesisToken, _position_index++, "(", null);
-            } else if (get_current_token == ')') {
-                return new SyntaxToken(SyntaxCategory.CloseParenthesisToken, _position_index++, ")", null);
-            } 
+            // if (GetCurrentToken == '+') {
+            //     return new SyntaxToken(SyntaxCategory.PlusToken, _position_index++, "+", null);
+            // } else if (GetCurrentToken == '-') {
+            //     return new SyntaxToken(SyntaxCategory.MinusToken, _position_index++, "-", null);
+            // } else if (GetCurrentToken == '*') {
+            //     return new SyntaxToken(SyntaxCategory.TimesToken, _position_index++, "*", null);
+            // } else if (GetCurrentToken == '/') {
+            //     return new SyntaxToken(SyntaxCategory.DivideToken, _position_index++, "/", null);
+            // } else if (GetCurrentToken == '(') {
+            //     return new SyntaxToken(SyntaxCategory.OpenParenthesisToken, _position_index++, "(", null);
+            // } else if (GetCurrentToken == ')') {
+            //     return new SyntaxToken(SyntaxCategory.CloseParenthesisToken, _position_index++, ")", null);
+            // } 
+
+            switch (GetCurrentToken)
+            {
+                case '+':
+                    return new SyntaxToken(SyntaxCategory.PlusToken, _position_index++, "+", null);
+                case '-':
+                    return new SyntaxToken(SyntaxCategory.MinusToken, _position_index++, "-", null);
+                case '*':
+                    return new SyntaxToken(SyntaxCategory.TimesToken, _position_index++, "*", null);
+                case '/':
+                    return new SyntaxToken(SyntaxCategory.DivideToken, _position_index++, "/", null);
+                case '(':
+                    return new SyntaxToken(SyntaxCategory.OpenParenthesisToken, _position_index++, "(", null);
+                case ')':
+                    return new SyntaxToken(SyntaxCategory.CloseParenthesisToken, _position_index++, ")", null);
+            }
 
             // For unknown token error exception msgs
-            _diagnostics.Add($"ERROR: Unknown token: '{get_current_token}'");
+            _diagnostics.Add($"ERROR: Unknown token: '{GetCurrentToken}'");
 
             // For other types of token, just return the char 
-            return new SyntaxToken(SyntaxCategory.UnknownToken, _position_index++, 
-                                   _text.Substring(_position_index - 1, 1), null);
+            return new SyntaxToken(SyntaxCategory.UnknownToken, _position_index++, _text.Substring(_position_index - 1, 1), null);
         }
     }
 }
